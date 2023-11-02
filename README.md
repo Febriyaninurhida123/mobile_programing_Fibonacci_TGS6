@@ -192,4 +192,257 @@ public class ThirdActivity extends AppCompatActivity {
 - saat di klik button Toast akan muncul tulisan fibonacci :
   <img width="1080" alt="Cuplikan layar 2023-11-01 213732" src="https://github.com/Febriyaninurhida123/mobile_programing_Fibonacci_TGS6/assets/90132092/62e1d36d-8789-4673-9027-3938d657bad3">
 
+## Selanjutnya adalah membuat button dan text view baru meliputi:
+* button restart(back),
+* button max
+* textview untuk input nilai maximalnya
+## Layout
+Pada layout ini, saya membuat tiga button dan satu textview :
+1. `button_limit`, berfungsi sebagai tombol “Set Limit” yang nantinya ketika di tekan akan muncul sebuah pop-up untuk masukan limit angka yang ingin kita hitung.
+2. `button_count`, berfungsi sebagai tombol “count” yang nantinya ketika tombol ditekan akan menghitung bilangan fibonaccinya sesuai dengan yang kita limit. Juga berbeda warna pada setiap angka, agar tidak keliru.
+3. 'button_restart', berfungsi sebagai tombol restart yang nantinya angka akan kembali ke awal.
+4. Textview `show_count`, yang berfungsi untuk menampilkan angka atau bilangan fibonaccinya yang tepat berada di tengah.
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:ignore="ExtraText"
+    tools:context="com.example.fibonacci.ThirdActivity">
+
+
+    <Button
+        android:id="@+id/button_limit"
+        android:layout_width="409dp"
+        android:layout_height="84dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:background="@color/colorPrimary"
+        android:onClick="setLimit"
+        android:text="Masukkan Angka Limit"
+        android:textColor="@android:color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.507"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="UsingOnClickInXml,VisualLintButtonSize" />
+
+    <Button
+        android:id="@+id/button_count"
+        android:layout_width="190dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@color/colorPrimary"
+        android:onClick="countUp"
+        android:text="Count"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="UsingOnClickInXml,VisualLintButtonSize" />
+
+    <Button
+        android:id="@+id/button_restart"
+        android:layout_width="190dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@color/colorPrimary"
+        android:onClick="back1"
+        android:text="Restart"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="UsingOnClickInXml" />
+
+    <TextView
+        android:id="@+id/show_count"
+        android:layout_width="417dp"
+        android:layout_height="649dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="#FFFF00"
+        android:gravity="center_vertical"
+        android:text="0"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimary"
+        android:textSize="160sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/button_count"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/button_limit"
+        app:layout_constraintVertical_bias="0.0"
+        tools:ignore="RtlCompat" />
+```
+<img width="1080" alt="Cuplikan layar 2023-11-02 110621" src="https://github.com/Febriyaninurhida123/mobile_programing_Fibonacci_TGS6/assets/90132092/2598e85d-081f-4595-a409-0b0cdb2f7649">
+
+designnya akan seperti ini :
+<img width="1080" alt="Cuplikan layar 2023-11-02 111111" src="https://github.com/Febriyaninurhida123/mobile_programing_Fibonacci_TGS6/assets/90132092/68bd6e93-f338-4e0f-a4c0-8b92b60f799b">
+
+## Java class
+Pada Java class `MainActivity.java` berisi semua coding untuk menjalankan aplikasi. Seperti fungsi untuk tombol-tombol, dialog set limit, warna yang berbeda pada setiap angka, lalu warna background yang bisa berubah dan rumus bilangan fibonacci.
+</androidx.constraintlayout.widget.ConstraintLayout>
+Berikut adalah coding pada menu layout :
+```java
+package com.example.fibonacci;
+
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.graphics.Color;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
+import androidx.appcompat.app.AppCompatActivity;
+
+
+public class ThirdActivity extends AppCompatActivity {
+    private TextView show_count;
+    private int count = 1;
+    private long fibNMinus1 = 1;
+    private long fibNMinus2 = 1;
+    private int limit = -1; // Inisialisasi limit dengan nilai default
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_fibonacci);
+
+        show_count = findViewById(R.id.show_count);
+    }
+
+    public void countUp(View view) {
+        if (count == 1) {
+            show_count.setText("0");
+        }
+
+        else {
+            if (limit != -1 && count > limit) {
+                // Jika count melebihi limit, atur ulang perhitungan
+                count = 1;
+                fibNMinus1 = 1;
+                fibNMinus2 = 0;
+                show_count.setText(getString(R.string.count_initial_value));
+            }
+            else {
+                long fibCurrent = fibNMinus1 + fibNMinus2;
+                fibNMinus2 = fibNMinus1;
+                fibNMinus1 = fibCurrent;
+
+                //Mengatur warna teks berdasarkan angka Fibonacci
+                int colorResId = R.color.orange; // Warna Default
+                switch (count % 11) {
+                    case 1:
+                        colorResId = R.color.orange; // Warna Orange
+                        break;
+                    case 2:
+                        colorResId = R.color.hijaumuda; // Warna Hijau Muda
+                        break;
+                    case 3:
+                        colorResId = R.color.purple; // Warna Ungu
+                        break;
+                    case 4:
+                        colorResId = R.color.salem; // Warna Salem
+                        break;
+                    case 5:
+                        colorResId = R.color.birumuda; // Warna Biru Muda
+                        break;
+                    case 6 :
+                        colorResId = R.color.purple; // Warna Kuning
+                        break;
+                    case 7:
+                        colorResId = R.color.hijau; // Warna Hijau
+                        break;
+                    case 8:
+                        colorResId = R.color.cream; // Warna Cream
+                        break;
+                    case 9:
+                        colorResId = R.color.pink; // Warna Pink
+                        break;
+                    case 10:
+                        colorResId = R.color.biru; // Warna Biru
+                        break;
+                    case 11:
+                        colorResId = R.color.colorAccent; // Warna Pink Tua
+                        break;
+                }
+                show_count.setTextColor(getResources().getColor(colorResId));
+                show_count.setText(String.valueOf(fibCurrent));
+                show_count.setBackgroundColor(Color.YELLOW);
+            }
+        }
+
+        count++;
+    }
+
+    public void back1(View view) {
+        count = 1;
+        fibNMinus1 = 1;
+        fibNMinus2 = 0;
+        show_count.setText("0"); // Mengatur teks pada TextView menjadi "0"
+        show_count.setTextColor(getResources().getColor(R.color.colorPrimary)); // Mengatur warna teks kembali ke warna default
+        show_count.setBackgroundColor(Color.YELLOW); // Menghapus latar belakang yang mungkin telah diatur sebelumnya
+    }
+
+
+    public void setLimit(View view) {
+        // Create and display a dialog to set the limit
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Set Limit");
+
+        final EditText input = new EditText(this);
+        input.setInputType(android.text.InputType.TYPE_CLASS_NUMBER);
+        builder.setView(input);
+
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // Get the limit from the input and set it for calculations
+                String limitStr = input.getText().toString();
+                limit = Integer.parseInt(limitStr);
+            }
+        });
+
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        builder.show();
+    }
+}
+```
+<img width="1080" alt="Cuplikan layar 2023-11-02 110734" src="https://github.com/Febriyaninurhida123/mobile_programing_Fibonacci_TGS6/assets/90132092/2151c47a-0ffc-41cd-90d1-7f823c6a6b06">
+hasilnya saat di run :
+
+<img width="1080" alt="Cuplikan layar 2023-11-02 111353" src="https://github.com/Febriyaninurhida123/mobile_programing_Fibonacci_TGS6/assets/90132092/50654100-d09b-4ff0-af69-586b83639319">
+
+saat diklik button limit akan muncul :
+<img width="1080" alt="Cuplikan layar 2023-11-02 111548" src="https://github.com/Febriyaninurhida123/mobile_programing_Fibonacci_TGS6/assets/90132092/778cc9ed-f887-42a0-8d69-8d8b6fb94de4">
+
+setelah di set maka tinggal klik count hingga mencapai batas maksimum:
+<img width="1080" alt="Cuplikan layar 2023-11-02 111353" src="https://github.com/Febriyaninurhida123/mobile_programing_Fibonacci_TGS6/assets/90132092/f2d7ab4d-f244-4c29-83ff-1f8a29c1947c">
+<img width="1080" alt="Cuplikan layar 2023-11-02 111611" src="https://github.com/Febriyaninurhida123/mobile_programing_Fibonacci_TGS6/assets/90132092/44a309d5-1655-40bc-a1cb-f0b228e64100">
+<img width="1080" alt="Cuplikan layar 2023-11-02 111628" src="https://github.com/Febriyaninurhida123/mobile_programing_Fibonacci_TGS6/assets/90132092/9d1534cc-bb8b-4ef6-9e10-e77ff0959f44">
+<img width="1080" alt="Cuplikan layar 2023-11-02 111650" src="https://github.com/Febriyaninurhida123/mobile_programing_Fibonacci_TGS6/assets/90132092/7e22c82d-381e-45c7-9afe-b2257b268933">
+<img width="1080" alt="Cuplikan layar 2023-11-02 111711" src="https://github.com/Febriyaninurhida123/mobile_programing_Fibonacci_TGS6/assets/90132092/2aa01ff9-29a1-4b23-a89e-9cec6656430c">
+
+saat di klik retart maka akan kembali ke nol seperti berikut:
+<img width="1080" alt="Cuplikan layar 2023-11-02 111739" src="https://github.com/Febriyaninurhida123/mobile_programing_Fibonacci_TGS6/assets/90132092/df9d29ed-5685-424a-9f77-53ae16a438d3">
+
 # sekian dan terima kasih 
