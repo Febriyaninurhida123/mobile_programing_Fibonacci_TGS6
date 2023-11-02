@@ -428,21 +428,22 @@ public class ThirdActivity extends AppCompatActivity {
 }
 ```
 <img width="1080" alt="Cuplikan layar 2023-11-02 110734" src="https://github.com/Febriyaninurhida123/mobile_programing_Fibonacci_TGS6/assets/90132092/2151c47a-0ffc-41cd-90d1-7f823c6a6b06">
-hasilnya saat di run :
+
+#### hasilnya saat di run :
 
 <img width="1080" alt="Cuplikan layar 2023-11-02 111353" src="https://github.com/Febriyaninurhida123/mobile_programing_Fibonacci_TGS6/assets/90132092/50654100-d09b-4ff0-af69-586b83639319">
 
-saat diklik button limit akan muncul :
+#### saat diklik button limit akan muncul :
 <img width="1080" alt="Cuplikan layar 2023-11-02 111548" src="https://github.com/Febriyaninurhida123/mobile_programing_Fibonacci_TGS6/assets/90132092/778cc9ed-f887-42a0-8d69-8d8b6fb94de4">
 
-setelah di set maka tinggal klik count hingga mencapai batas maksimum:
+#### setelah di set maka tinggal klik count hingga mencapai batas maksimum:
 <img width="1080" alt="Cuplikan layar 2023-11-02 111353" src="https://github.com/Febriyaninurhida123/mobile_programing_Fibonacci_TGS6/assets/90132092/f2d7ab4d-f244-4c29-83ff-1f8a29c1947c">
 <img width="1080" alt="Cuplikan layar 2023-11-02 111611" src="https://github.com/Febriyaninurhida123/mobile_programing_Fibonacci_TGS6/assets/90132092/44a309d5-1655-40bc-a1cb-f0b228e64100">
 <img width="1080" alt="Cuplikan layar 2023-11-02 111628" src="https://github.com/Febriyaninurhida123/mobile_programing_Fibonacci_TGS6/assets/90132092/9d1534cc-bb8b-4ef6-9e10-e77ff0959f44">
 <img width="1080" alt="Cuplikan layar 2023-11-02 111650" src="https://github.com/Febriyaninurhida123/mobile_programing_Fibonacci_TGS6/assets/90132092/7e22c82d-381e-45c7-9afe-b2257b268933">
 <img width="1080" alt="Cuplikan layar 2023-11-02 111711" src="https://github.com/Febriyaninurhida123/mobile_programing_Fibonacci_TGS6/assets/90132092/2aa01ff9-29a1-4b23-a89e-9cec6656430c">
 
-saat di klik retart maka akan kembali ke nol seperti berikut:
+#### saat di klik restart maka akan kembali ke nol seperti berikut:
 <img width="1080" alt="Cuplikan layar 2023-11-02 111739" src="https://github.com/Febriyaninurhida123/mobile_programing_Fibonacci_TGS6/assets/90132092/df9d29ed-5685-424a-9f77-53ae16a438d3">
 
 # sekian dan terima kasih 
